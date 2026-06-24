@@ -1,0 +1,8 @@
+streamlit
+pandas
+plotly
+pdfplumber
+python-docx
+Pillow
+pdfminer.six
+pypdfium2
