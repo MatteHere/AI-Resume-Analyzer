@@ -2,7 +2,8 @@ import re
 
 
 def extract_email(text):
-    pattern = r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+    pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+
     match = re.search(pattern, text)
 
     if match:
@@ -12,7 +13,8 @@ def extract_email(text):
 
 
 def extract_phone(text):
-    pattern = r'(\+91[\-\s]?)?[6-9]\d{9}'
+    pattern = r"(\+91[\-\s]?)?[6-9]\d{9}"
+
     match = re.search(pattern, text)
 
     if match:
@@ -22,21 +24,31 @@ def extract_phone(text):
 
 
 def extract_linkedin(text):
-    pattern = r'https?://(?:www\.)?linkedin\.com/in/[A-Za-z0-9_-]+'
-    match = re.search(pattern, text)
+    pattern = r"(https?://(?:www\.)?linkedin\.com/in/[A-Za-z0-9_-]+)"
+
+    match = re.search(
+        pattern,
+        text,
+        re.IGNORECASE
+    )
 
     if match:
-        return match.group()
+        return match.group(1)
 
     return "Not Found"
 
 
 def extract_github(text):
-    pattern = r'https?://(?:www\.)?github\.com/[A-Za-z0-9_-]+'
-    match = re.search(pattern, text)
+    pattern = r"(https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+)"
+
+    match = re.search(
+        pattern,
+        text,
+        re.IGNORECASE
+    )
 
     if match:
-        return match.group()
+        return match.group(1)
 
     return "Not Found"
 

@@ -75,6 +75,30 @@ if analyze_button:
                 job_description
             )
 
+        name = extract_name(resume_text)
+        email = extract_email(resume_text)
+        phone = extract_phone(resume_text)
+        linkedin = extract_linkedin(resume_text)
+        github = extract_github(resume_text)
+
+        email_html = (
+            f'<a href="mailto:{email}" target="_blank">📧 Send Email</a>'
+            if email != "Not Found"
+            else "Not Found"
+        )
+
+        github_html = (
+            f'<a href="{github}" target="_blank">💻 View GitHub Profile</a>'
+            if github != "Not Found"
+            else "Not Found"
+        )
+
+        linkedin_html = (
+            f'<a href="{linkedin}" target="_blank">💼 View LinkedIn Profile</a>'
+            if linkedin != "Not Found"
+            else "Not Found"
+        )
+
         st.success("Resume analyzed successfully!")
 
         st.markdown('<div class="section-title">📊 Dashboard Overview</div>', unsafe_allow_html=True)
@@ -129,12 +153,6 @@ if analyze_button:
 
         st.markdown('<div class="section-title">👤 Candidate Profile</div>', unsafe_allow_html=True)
 
-        name = extract_name(resume_text)
-        email = extract_email(resume_text)
-        phone = extract_phone(resume_text)
-        linkedin = extract_linkedin(resume_text)
-        github = extract_github(resume_text)
-
         p1, p2 = st.columns(2)
 
         with p1:
@@ -153,7 +171,7 @@ if analyze_button:
                 f"""
                 <div class="profile-card">
                     <h4>📧 Email</h4>
-                    <p>{email}</p>
+                    <p>{email_html}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -177,7 +195,7 @@ if analyze_button:
                 f"""
                 <div class="profile-card">
                     <h4>💻 GitHub</h4>
-                    <p>{github}</p>
+                    <p>{github_html}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -187,7 +205,7 @@ if analyze_button:
             f"""
             <div class="profile-card">
                 <h4>💼 LinkedIn</h4>
-                <p>{linkedin}</p>
+                <p>{linkedin_html}</p>
             </div>
             """,
             unsafe_allow_html=True
